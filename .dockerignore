@@ -1,0 +1,15 @@
+.git
+.gitignore
+Jenkinsfile
+README.md
+docs/
+jenkins/
+scripts/
+**/__pycache__
+**/.pytest_cache
+**/*.pyc
+venv/
+reports/
+app/tests
+app/requirements-dev.txt
+app/.flake8
