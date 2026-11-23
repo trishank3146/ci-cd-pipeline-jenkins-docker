@@ -1,0 +1,25 @@
+# Runs Jenkins locally. Jenkins uses the host's Docker engine (through the
+# mounted socket) to build images and run the app container.
+#
+#   cd jenkins && docker compose up -d --build
+#   open http://localhost:8080
+services:
+  jenkins:
+    build: .
+    container_name: jenkins
+    user: root                      # needed to use the mounted Docker socket
+    ports:
+      - "8080:8080"                 # Jenkins web UI
+      - "50000:50000"               # agent port
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      # Jenkins runs in a container, so the deployed app is reached via the host
+      - HEALTH_HOST=host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:

@@ -1,0 +1,4 @@
+# Tools used by the Jenkins Lint and Test stages (not installed in the Docker image)
+-r requirements.txt
+pytest>=8.0
+flake8>=7.0
